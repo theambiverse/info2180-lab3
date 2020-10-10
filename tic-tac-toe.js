@@ -18,8 +18,8 @@ let player=0;
     let clicked=document.querySelectorAll('.square');
     clicked.forEach(function(elem){
         elem.addEventListener('click', function(elem) {
-          //stopchange=elem.target.textContent;
-         // while (1==1)/*((stopchange.textContent==null) ||(stopchange.textContent==undefined))*/{
+          stopchange=document.elem.target.textContent;
+         // if ((stopchange.textContent==null) ||(stopchange.textContent==undefined))*/{
             if (player==0 || player%2==0){
               //elem.target.classList.add('square.X');
               elem.target.textContent='X';
@@ -44,7 +44,9 @@ let player=0;
     });
 
     elem.addEventListener('mouseout', function(e) {
-      e.target.className+='hover.O';
+      //e.target.className+='hover.O';
+      e.target.classList.remove('hover');
+      //e.target.classList.add('hover.O');
     });
   });
 
@@ -56,11 +58,47 @@ let player=0;
 
   //EX 4: check for winner
 
+
+
   //EX 5: restart game
+  function restartG() {
+    let rebutton =document.querySelector('.btn');
+    rebutton.addEventListener('click', function(e) {
+      let  reSquares = document.querySelectorAll('.square');
+        reSquares.forEach(function(e){
+          e.classList.remove('square.X');
+          e.classList.remove('square.O');
+          e.classList.remove('hover.O');
+          e.innerHTML=null;
+
+          //CHANGE STATUS BUTTON TOO
+        });
+    });}
+  restartG();
+
+
+  
+
+  
 
 
   //EX 6: Disallow cheating
 
+ /* function noTakeBacks() {
+    let rebutton =document.querySelector('.btn');
+    rebutton.addEventListener('click', function(e) {
+      let  reSquares = document.querySelectorAll('.square');
+        reSquares.forEach(function(e){
+          if (e.textContent!=null || e.textContent!=undefined){
+            e.classList.remove('square.X');
+            e.classList.remove('square.O');
+            e.classList.remove('hover.O');
+            e.innerHTML=null;
+            }
+          //CHANGE STATUS BUTTON TOO
+        });
+    });}
+  noTakeBacks();*/
 
 
 
