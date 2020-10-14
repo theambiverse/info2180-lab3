@@ -29,18 +29,16 @@ function play(){
         element.addEventListener('click', function(elem) {
             
             if (player==0){
-              //elem.target.classList.add('square.X');
-              //elem.preventDefault();
               elem.target.innerHTML='X';
               elem.target.classList.add('square.X');
-             // let ind=clicked.findIndex(element);
+             
             
               player++;
               current="X";
 
-              //console.log(current, player);
+          
               
-              //loadAll[]=
+    
               if (checkwin()=='X'){
                document.querySelector('#status').textContent='Congratulation! X is the Winner!';
                document.querySelector('#status').classList.add('status.you-won');
@@ -54,7 +52,7 @@ function play(){
           else{elem.target.innerHTML="O";
             elem.target.classList.add('square.O');
             player--;
-            current="O";//console.log(current, player);
+            current="O";
            if (checkwin()=='O'){
               document.getElementById('status').classList.replace('status.you-won','status');
               document.getElementById('status.you-won').textContent="'Congratulation! O is the Winner!'";
@@ -96,7 +94,7 @@ play();
 
 
   //EX 4: check for winner
-  //Winner matrics: D=Draw, X=X wins, O=O wins
+
 
   function checkwin(){
     const winCombo=[[0,1,2], [3,4,5], [6,7,8], [0,3,6],
@@ -111,7 +109,7 @@ play();
        let cell_2= returnDS(_2nd);
        let cell_3=returnDS(_3rd);
 
-       //console.log(cell_1, 'this');
+       //console.log(cell_1);
       if (cell_1.innerText=='X' && cell_2.innerText=='X' && cell_3.innerText=='X'){
         
         return 'X';
