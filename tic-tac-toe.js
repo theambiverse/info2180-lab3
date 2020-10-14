@@ -6,7 +6,13 @@ document.addEventListener("DOMContentLoaded", function(){ //to load js after htm
       let boxes=document.querySelectorAll('#board>div');
       boxes.forEach(element=>{
           element.classList.add('square');
+      
       });
+      let winVar=document.querySelectorAll('.square');
+      let i=0;
+      winVar.forEach(elem=>{
+        elem.classList.add(''+i++);
+      })
   }
 
   boxFunc();
@@ -15,53 +21,58 @@ document.addEventListener("DOMContentLoaded", function(){ //to load js after htm
   
 let player=0;
 let current=null;
+let loadAll=['','','','','','','','',''];
 
 function play(){
   let clicked=document.querySelectorAll('.square');
     clicked.forEach(function(element){
         element.addEventListener('click', function(elem) {
             
-            if (player==0 || player%2==0){
+            if (player==0){
               //elem.target.classList.add('square.X');
               //elem.preventDefault();
               elem.target.innerHTML='X';
               elem.target.classList.add('square.X');
-              
+             // let ind=clicked.findIndex(element);
             
               player++;
               current="X";
-              if (checkwin(element)=='X'){
+
+              //console.log(current, player);
+              
+              //loadAll[]=
+              if (checkwin()=='X'){
                document.querySelector('#status').textContent='Congratulation! X is the Winner!';
                document.querySelector('#status').classList.add('status.you-won');
                
 
               }
-              else if (checkwin(element)=='D'){
-                //ends game
-              } 
+              
             }
             
 
           else{elem.target.innerHTML="O";
             elem.target.classList.add('square.O');
-            player++;
-            current="O";
-            if (checkwin(element)=='O'){
-              //document.getElementById('status').classList.replace('status.you-won','status');
-              //document.getElementById('status.you-won').innerHTML="COngratgs";
+            player--;
+            current="O";//console.log(current, player);
+           if (checkwin()=='O'){
+              document.getElementById('status').classList.replace('status.you-won','status');
+              document.getElementById('status.you-won').textContent="'Congratulation! O is the Winner!'";
 
               }
-              else if (checkwin(element)=='D'){
-                //ends game
-              } 
+              
           }
         
         }, {once: true});
 
     });
+  
+
 }
 
 play();
+
+
 
   //EX 3: to change square style with hover
   let hoverboxes = document.querySelectorAll('.square');
@@ -87,30 +98,41 @@ play();
   //EX 4: check for winner
   //Winner matrics: D=Draw, X=X wins, O=O wins
 
-  function checkwin(element){
-    return 'X';
+  function checkwin(){
+    const winCombo=[[0,1,2], [3,4,5], [6,7,8], [0,3,6],
+     [1,4,7], [2,5,8], [2,4,6], [0,4,8]];
+
+     for (var i=0; i<winCombo.length;i++){
+       let _1fst=winCombo[i][0];
+       let _2nd=winCombo[i][1];
+       let _3rd=winCombo[i][2];
+       //console.log(_1fst);
+       let cell_1=returnDS(_1fst);
+       let cell_2= returnDS(_2nd);
+       let cell_3=returnDS(_3rd);
+
+       //console.log(cell_1, 'this');
+      if (cell_1.innerText=='X' && cell_2.innerText=='X' && cell_3.innerText=='X'){
+        
+        return 'X';
+     }
+
+     else  if (cell_1.innerText=='O' && cell_2.innerText=='O' && cell_3.innerText=='O'){
+      
+      return 'O';
+   }
+   
+
   }
+}
 
 
 
-  //let winner='A';
-  /*const winCombo=[[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [2,4,6], [0,4,8]];
-  let loadAll=['','','','','','','','',''];
-  let loadAll= document.querySelectorAll('#board div');
-  let win=[];
-  
-  function winner(curent){
-    if()
+function returnDS(num){
+  let cell=document.getElementsByClassName(''+num);
+  return cell;
+}
 
-  }
- fullGame();
-  function Winner(){
-    if (fullGame()==true){
-
-    }
-  }
-  
-  //if */
 
 
  
@@ -119,19 +141,21 @@ play();
   function restartG() {
     let rebutton =document.querySelector('.btn');
     rebutton.addEventListener('click', function(e) {
-      let  reSquares = document.querySelectorAll('.square');
+      /*let  reSquares = document.querySelectorAll('.square');
         reSquares.forEach(function(e){
+          
           e.classList.remove('square.X');
           e.classList.remove('square.O');
           e.classList.remove('hover.O');
-          e.innerHTML=null;
+          e.innerText=null;
           //check
           document.getElementById('status').classList.remove('status.you-won');
 
-        });
+        });*/
+        location.reload();
     });}
   restartG();
 
 
 
-})
+});
